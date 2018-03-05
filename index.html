@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+</head>
+<body>
+	<div id="back_grass">
+		<div class="subtitle" id="name">Created by Sean Bickle</div>
+		<div class="subtitle" id="CanJam">CanJam 2018</div>
+	</div>
+	<div id="back_sky">
+		<div id="cloud"></div>
+	</div>
+	<div id="container">
+		<div id="title"></div>
+		<div id="items_container">
+			<div class="items" id="melons">
+				<div class="icon" id="melonIcon">
+					<div class="subtitle" id="meloncount">0</div>
+				</div>
+				<div class="subtitle">MELONS</div>
+			</div>
+			<div class="items" id="seeds">
+				<div class="icon" id="seedsIcon"></div>
+				<div class="subtitle">SEEDS(S)</div>
+			</div>
+			<div class="items" id="can">
+				<div class="icon" id="canIcon"></div>
+				<div class="subtitle">WATER CAN(W)</div>
+			</div>
+			<div class="items" id="clippers">
+				<div class="icon" id="clippersIcon"></div>
+				<div class="subtitle">CLIPPERS(C)</div>
+			</div>
+		</div>
+		<div id="diff_container">
+			<div class="diff" id="easy" style="left: 0%;">EASY</div>
+			<div class="diff" id="medium" style="left: 25%;">MEDIUM</div>
+			<div class="diff" id="hard" style="left: 50%;">HARD</div>
+			<div class="diff" id="elon" style="left: 75%;">ELON</div>
+		</div>
+		<canvas id="cnv" height="1200" width="1200" style="position: absolute; bottom:0px;"></canvas>
+	</div>
+	
+	
+	<script src="script.js"></script>
+	<script src="patch.js"></script>
+</body>
+</html>
