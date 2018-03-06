@@ -218,4 +218,4 @@ function updateAllPatchTimes(diff){
 	for(var i = 0; i < patches.length; i++){
 		patches[i].timeToGrow = ranRange(minTime, maxTime);
 	}
-}
+} 

@@ -18,7 +18,7 @@ class Patch{
 		this.timeToGrow = timeToGrow;
 		//Check if soil has been watered
 		this.watered = false;
-	}
+	} 
 	
 	draw(){
 		//update plant if seeds planted & soil watered
