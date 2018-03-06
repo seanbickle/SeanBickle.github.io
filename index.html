@@ -3,17 +3,21 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+	<title>Melons</title>
+	<link rel="icon" href="res/favicon.ico" type="image"/>
 </head>
 <body>
-	<div id="back_grass">
-		<div class="subtitle" id="name">Created by Sean Bickle</div>
-		<div class="subtitle" id="CanJam">CanJam 2018</div>
-	</div>
+	<!--Background-->
+	<div id="back_grass"></div>
 	<div id="back_sky">
 		<div id="cloud"></div>
 	</div>
+	
+	<!--Main Body-->
 	<div id="container">
 		<div id="title"></div>
+		
+		<!-- Farming Tools -->
 		<div id="items_container">
 			<div class="items" id="melons">
 				<div class="icon" id="melonIcon">
@@ -34,13 +38,24 @@
 				<div class="subtitle">CLIPPERS(C)</div>
 			</div>
 		</div>
+		
+		<!-- Difficulty Buttons -->
 		<div id="diff_container">
 			<div class="diff" id="easy" style="left: 0%;">EASY</div>
 			<div class="diff" id="medium" style="left: 25%;">MEDIUM</div>
 			<div class="diff" id="hard" style="left: 50%;">HARD</div>
-			<div class="diff" id="elon" style="left: 75%;">ELON</div>
+			<div class="diff" id="farmer" style="left: 75%;">FARMER</div>
 		</div>
 		<canvas id="cnv" height="1200" width="1200" style="position: absolute; bottom:0px;"></canvas>
+	</div>
+	
+	<!-- Footer  -->
+	<div id="footer_container">
+		<div id="footer">
+			<div class="subtitle" id="footer">Created by Sean Bickle | CanJam 2018 |</div>
+			<div class="footer_buttons" id="linkedin"></div>	
+			<div class="footer_buttons" id="instagram"></div>
+		</div>
 	</div>
 	
 	

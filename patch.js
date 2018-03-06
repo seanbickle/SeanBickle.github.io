@@ -51,6 +51,7 @@ class Patch{
 	update(){
 		//Get seconds that have passed
 		var currentTime = Math.trunc(performance.now() / 1000);
+		//Check if a timeToGrow number of seconds have passed; don't update if melon is dead
 		if(this.lastUpdate != currentTime && (currentTime - this.lastUpdate) % this.timeToGrow == 0 && this.stage < 5){
 			//Increment stage
 			++this.stage;
@@ -59,6 +60,7 @@ class Patch{
 		}
 	}
 	
+	//Apply chosen tool to patch
 	modify(tool){
 		//Seeds used
 		if(tool == 1 && this.stage < 1){
@@ -68,10 +70,10 @@ class Patch{
 		
 		//Clippers used
 		if(tool == 2 && this.stage == 4){
-			//Set score based on how many other melons are active
+			//Set score based on how many other melons are active + watered
 			var score = 0;
 			for(var i = 0; i < patches.length; i++){
-				if(patches[i].stage > 0) ++score;
+				if(patches[i].watered && patches[i].stage != 5) ++score;
 			}
 			melons += score;
 			//Reset patch
@@ -113,12 +115,13 @@ class Patch{
 				minTime = 3;
 				maxTime = 10;
 				break;
-			//Expert mode
+			//Farmer mode
 			case(3):
-				minTime = 5184000;
-				maxTime = 6912000;
+				minTime = 1296000;
+				maxTime = 1728000;
 				break;
 		}
+		//Set new time to grow
 		this.timeToGrow = ranRange(minTime, maxTime);
 	}
 }

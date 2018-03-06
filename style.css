@@ -1,15 +1,14 @@
 body{
 	margin: 0px;
 	user-select: none;
-	background: rgb(119, 221, 119);
-	overflow-x: hidden;
+	background: rgb(20,20,20);
 }
 
 #back_grass{
-	height: 1100px;
+	height: 1200px;
 	width: 100%;
 	position: absolute;
-	top: 980px;
+	top: 880px;
 	background-color: rgb(119, 221, 119);
 }
 
@@ -19,6 +18,7 @@ body{
 	position: absolute;
 	top: 0px;
 	background-color: rgb(30, 158, 255);
+	overflow-x: hidden;
 }
 
 #cloud{
@@ -27,7 +27,7 @@ body{
 	position: absolute;
 	left: 100%;
 	top: 250px;
-	background-image: url('res/cloud2.png');
+	background-image: url('res/cloud.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	animation: cloud 60s linear 30s infinite;
@@ -51,7 +51,7 @@ body{
 	width: 100%;
 	position: absolute;
 	top: 0px;
-	background-image: url('res/title2.png');
+	background-image: url('res/title.png');
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -115,22 +115,13 @@ body{
 		top: -50px;
 		text-shadow: 0px 5px 3px rgb(20,20,20), 0px -5px 3px rgb(20,20,20);
 	}
-	#name{
-		width: 600px;
-		position: absolute;
-		bottom: 0px;
-		left: 0px;
-		text-shadow: 0px 4px 1px rgb(100,150,100);
+	.subtitle#footer{
+		width: 500px;
+		font-size: 20px;
+		line-height: 38px;
+		font-weight: normal;
+		text-shadow: 0px 2px 1px rgb(100,150,100);
 		text-align: left;
-		padding-left: 10px;
-	}
-	#CanJam{
-		width: 300px;
-		position: absolute;
-		bottom: 0px;
-		right: 0px;
-		text-shadow: 0px 4px 1px rgb(100,150,100);
-		text-align: right;
 		padding-right: 10px;
 	}
 	
@@ -139,7 +130,6 @@ body{
 	width: 1200px;
 	position: absolute;
 	top: 780px;
-	z-index: 1000;
 }
 
 .diff{
@@ -162,4 +152,41 @@ body{
 	}
 	#easy{
 		background-color: rgba(20,20,20,0.2);
+	}
+	
+#footer_container{
+	height: 40px;
+	width: 100%;
+	position: absolute;
+	background: rgb(20,20,20);
+	top: 2060px;
+}
+
+#footer{
+	height: 100%;
+	width: 1200px;
+	position: absolute;
+	margin-left: 50%;
+	left: -600px;
+	padding-left: 10px;
+}
+
+.footer_buttons{
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	border-radius: 15px;
+	top: 5px;
+}
+	.footer_buttons:hover{
+		background: rgb(240,240,240);
+		cursor: pointer;
+	}
+	#linkedin{
+		right: 10px;
+		background: url('res/linkedin.png');
+	}
+	#instagram{
+		right: 50px;
+		background: url('res/instagram.png');
 	}
