@@ -201,8 +201,9 @@ function harvestMelon(p, dead){
 	//Update score
 	if(dead) --score;
 	else{
+		//Point for melon harvested and growing melon
 		for(var i = 0; i < patches.length; i++){
-			if(patches[i].stage == 7) ++score;
+			if(patches[i].stage >= 4 && patches[i].stage != 8) ++score;
 		}
 	}
 
