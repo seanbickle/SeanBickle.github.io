@@ -1,6 +1,7 @@
 //GLOBAL VARIABLES
 //HTML tool container
 var tools_cont;
+var tools_height;
 //Array of HTML tool objects
 var tools = [];
 //Toolbar minimiser object
@@ -37,6 +38,7 @@ window.onload = function(){
 	diff_btn = document.getElementById("diff");
 	minbar = document.getElementById("min_bar");
 	tools_cont = document.getElementById("tools_cont");
+	tools_height = tools_cont.style.height;
 	tools = document.getElementsByClassName("tools");
 	soil = document.getElementsByClassName("soil");
 	audio = [new Audio("res/sound/select.wav"), new Audio("res/sound/water.wav")];
@@ -125,7 +127,7 @@ function changeDiff(){
 	//Change patch "time to grow" boundaries
 	if(diff == 0) growBounds = [10,20];
 	else if(diff == 1) growBounds = [2,8];
-	else if(diff == 2) growBounds = [30,50];
+	else if(diff == 2) growBounds = [1728000,2304000];
 
 	//Update all patch times to be within new growth boundary
 	for(var i = 0; i < patches.length; i++) patches[i].updateTime = ranRange(growBounds[0], growBounds[1]);
@@ -134,10 +136,11 @@ function changeDiff(){
 //Hide / Show Toolbar
 function minTools(){
 	if(tools_cont.style.height != "20px"){
+		tools_height = tools_cont.style.height;
 		tools_cont.style.height = "20px";
 		minbar.innerHTML = "show tools";
 	}else{
-		tools_cont.style.height = "120px";
+		tools_cont.style.height = tools_height;
 		minbar.innerHTML = "hide tools";
 	}
 }

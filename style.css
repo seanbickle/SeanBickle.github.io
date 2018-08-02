@@ -265,11 +265,13 @@ body{
 }
 /*TINY, 240px*/
 @media only screen and (max-width: 440px) {
-    #container, #tool_bar, #footer {width: 240px; left: -120px;}
+    #container, #tool_bar, #footer {width: 300px; left: -150px;}
+	#tools_cont{height: 80px;}
+	#footer{height: 60px; font-size: 15px;}
 	#title {height: 120px;}
 	#background_sky{height: 230px;}
-	.soil{height: 120px; width: 120px;}
-	.tools{height: 50px; width: 80px; margin: 0px;}
-	.tool_icon{height: 40px; width: 40px; margin: 3px 18px 3px 18px;}
-	.upper_button{font-size: 25px; width: 94px; margin: 0px 10px 0px 10px;}
+	.soil{height: 100px; width: 100px;}
+	.tools{height: 60px; width: 60px; margin: 0px;}
+	.tool_icon{height: 40px; width: 40px; margin: 8px 8px 8px 8px;}
+	.upper_button{font-size: 25px; width: 134px; margin: 0px 5px 0px 5px;}
 }
