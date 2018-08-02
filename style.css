@@ -263,7 +263,7 @@ body{
 	.tool_icon{height: 60px; width: 60px; margin: 20px 3px 20px 3px;}
 	.upper_button{width: 194px; margin: 0px 5px 0px 5px;}
 }
-/*TINY, 240px*/
+/*TINY, 240px
 @media only screen and (max-width: 440px) {
     #container, #tool_bar, #footer {width: 240px; left: -120px;}
 	#title {height: 120px;}
@@ -273,3 +273,4 @@ body{
 	.tool_icon{height: 40px; width: 40px; margin: 3px 18px 3px 18px;}
 	.upper_button{font-size: 25px; width: 94px; margin: 0px 10px 0px 10px;}
 }
+*/
