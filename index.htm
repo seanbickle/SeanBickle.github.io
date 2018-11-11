@@ -1,95 +1,56 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Melon Simulator</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="icon" href="res/favicon.ico">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
-
-		<script src="script.js"></script>
-	</head>
-
-	<body>
-		<div id="background_sky"></div>
-
-		<div id="container">
-			<div id="title"></div>
-			<div id="upper_buttons_cont">
-				<div class="upper_button" id="melon_count">0</div>
-				<div class="upper_button" id="diff">EASY</div>
-			</div>
-
-			<div id="soil_cont">
-				<div class="soil" data-id="0"></div>
-				<div class="soil" data-id="1"></div>
-				<div class="soil" data-id="2"></div>
-				<div class="soil" data-id="3"></div>
-				<div class="soil" data-id="4"></div>
-				<div class="soil" data-id="5"></div>
-				<div class="soil" data-id="6"></div>
-				<div class="soil" data-id="7"></div>
-				<div class="soil" data-id="8"></div>
-				<div class="soil" data-id="9"></div>
-				<div class="soil" data-id="10"></div>
-				<div class="soil" data-id="11"></div>
-				<div class="soil" data-id="12"></div>
-				<div class="soil" data-id="13"></div>
-				<div class="soil" data-id="14"></div>
-				<div class="soil" data-id="15"></div>
-				<div class="soil" data-id="16"></div>
-				<div class="soil" data-id="17"></div>
-				<div class="soil" data-id="18"></div>
-				<div class="soil" data-id="19"></div>
-				<div class="soil" data-id="20"></div>
-				<div class="soil" data-id="21"></div>
-				<div class="soil" data-id="22"></div>
-				<div class="soil" data-id="23"></div>
-				<div class="soil" data-id="24"></div>
-				<div class="soil" data-id="25"></div>
-				<div class="soil" data-id="26"></div>
-				<div class="soil" data-id="27"></div>
-				<div class="soil" data-id="28"></div>
-				<div class="soil" data-id="29"></div>
-			</div>
-		</div>
-
+<head>
+	<title>Melon Defense</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" href="res/fav.ico">
+	<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+		<header>
+			<div class="pump_coin"></div>
+			<div id="pumpkin_count">0</div>
+			<div id="plr_score">0</div>
+			<div id="plr_health">health: 100</div>
+			<div id="highScore">new high score!</div>
+			<div id="gameOver"></div>
+			<div id="endScore"></div>
+			<div id="restartLink">play again...</div>
+		</header>
+		<canvas id="cnv" height="1000" width="1200"></canvas>
 		<div id="tools_cont">
-			<div id="tool_bar">
-				<div id="min_bar">hide tools</div>
-				<div class="tools" data-id="0">
-					<div class="tool_icon"  id="spade_tool"></div>
-					Spade
-				</div>
-
-				<div class="tools" data-id="1">
-					<div class="tool_icon"  id="seeds_tool"></div>
-					Seeds
-				</div>
-
-				<div class="tools" data-id="2">
-					<div class="tool_icon" id="can_tool"></div>
-					Can
-				</div>
-
-				<div class="tools" data-id="3">
-					<div class="tool_icon" id="clippers_tool"></div>
-					Clippers
-				</div>
-
-				<div class="tools" data-id="4">
-					<div class="tool_icon" id="settings"></div>
-					Settings
-				</div>
+			<div class="tool" id="melee_tool">
+				<div class="tool_text" id="melee_text">attack (space), reach: 100</div>
+				<div class="tool_coin"></div>
+				<div class="tool_text upgrade" id="melee_upgrade">1000: +20 reach</div>
+			</div>
+			
+			<div class="tool" id="movement_tool">
+				<div class="tool_text" id="movement_text">movement (a / d), speed: 10</div>
+				<div class="tool_coin"></div>
+				<div class="tool_text upgrade" id="movement_upgrade" data-cost="100">100: +3 speed</div>
+			</div>
+			
+			<div class="tool" id="compost_tool">
+				<div class="tool_text" id="compost_text">use compost (0) (c)</div>
+				<div class="tool_coin"></div>
+				<div class="tool_text upgrade" id="compost_upgrade">3000: +1 compost</div>
+			</div>
+			
+			<div class="tool" id="grenade_tool">
+				<div class="tool_text" id="grenade_text">use grenade (0) (g)</div>
+				<div class="tool_coin"></div>
+				<div class="tool_text upgrade" id="grenade_upgrade">5000: +1 grenade</div>
 			</div>
 		</div>
+	</div>
+	
+	<footer>Sean Bickle | RAGJam 2018
+		<div class="social_buttons" id="instagram"></div>
+		<div class="social_buttons" id="linkedin"></div>
+	</footer>
 
-		<div id="footer_container">
-			<div id="footer">Sean Bickle | CanJam 2018
-				<div class="social_buttons" id="linkedin"></div>
-				<div class="social_buttons" id="instagram"></div>
-			</div>
-		</div>
-	</body>
+	<script src="script.js"></script>
+<body>
 </html>
