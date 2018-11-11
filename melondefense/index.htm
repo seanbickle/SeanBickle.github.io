@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Melon Defense</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" href="res/fav.ico">
+	<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+		<header>
+			<div class="pump_coin"></div>
+			<div id="pumpkin_count">0</div>
+			<div id="plr_score">0</div>
+			<div id="plr_health">health: 100</div>
+			<div id="highScore">new high score!</div>
+			<div id="gameOver"></div>
+			<div id="endScore"></div>
+			<div id="restartLink">play again...</div>
+		</header>
+		<canvas id="cnv" height="1000" width="1200"></canvas>
+		<div id="tools_cont">
+			<div class="tool" id="melee_tool">
+				<div class="tool_text" id="melee_text">attack (space), reach: 100</div>
+				<div class="tool_coin"></div>
+				<div class="tool_text upgrade" id="melee_upgrade">1000: +20 reach</div>
+			</div>
+			
+			<div class="tool" id="movement_tool">
+				<div class="tool_text" id="movement_text">movement (a / d), speed: 10</div>
+				<div class="tool_coin"></div>
+				<div class="tool_text upgrade" id="movement_upgrade" data-cost="100">100: +3 speed</div>
+			</div>
+			
+			<div class="tool" id="compost_tool">
+				<div class="tool_text" id="compost_text">use compost (0) (c)</div>
+				<div class="tool_coin"></div>
+				<div class="tool_text upgrade" id="compost_upgrade">3000: +1 compost</div>
+			</div>
+			
+			<div class="tool" id="grenade_tool">
+				<div class="tool_text" id="grenade_text">use grenade (0) (g)</div>
+				<div class="tool_coin"></div>
+				<div class="tool_text upgrade" id="grenade_upgrade">5000: +1 grenade</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer>Sean Bickle | RAGJam 2018
+		<div class="social_buttons" id="instagram"></div>
+		<div class="social_buttons" id="linkedin"></div>
+	</footer>
+
+	<script src="script.js"></script>
+<body>
+</html>

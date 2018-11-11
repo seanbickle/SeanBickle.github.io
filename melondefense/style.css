@@ -1,0 +1,232 @@
+body{
+	margin: 0px;
+	background-color: rgb(119, 221, 119);
+	user-select: none;
+}
+
+#container{
+	height: 100%;
+	width: 1200px;
+	position: absolute;
+	left: 50%;
+	margin-left: -600px;
+	overflow: hidden;
+}
+
+#cnv{
+	height: 100%;
+	width: 1200px;
+	position: absolute;
+}
+
+header{
+	height: 50px;
+	width: 100%;
+	position: absolute;
+	background: rgb(30,30,30);
+	z-index: 2;
+	transition-duration: 1s;
+	overflow: hidden;
+}
+
+#highScore{
+	height: 0px;
+	width: 100%;
+	position: absolute;
+	top: 40%;
+	color: yellow;
+	font-family: 'VT323', monospace;
+	font-size: 50px;
+	line-height: 50px;
+	text-align: center;
+	letter-spacing: 4px;
+	overflow:hidden;
+}
+
+#gameOver{
+	height: 100px;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	margin-top: -50px;
+	color: orange;
+	font-family: 'VT323', monospace;
+	font-size: 90px;
+	line-height: 100px;
+	text-align: center;
+	letter-spacing: 3px;
+}
+
+#endScore{
+	height: 80px;
+	width: 100%;
+	position: absolute;
+	top: 55%;
+	color: white;
+	font-family: 'VT323', monospace;
+	font-size: 50px;
+	line-height: 80px;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+#restartLink{
+	height: 0px;
+	width: 100%;
+	position: absolute;
+	top: 60%;
+	color: white;
+	font-family: 'VT323', monospace;
+	font-size: 60px;
+	line-height: 80px;
+	text-align: center;
+	letter-spacing: 2px;
+	text-decoration: underline;
+	transition-duration: 0.1s;
+	cursor: pointer;
+	overflow: hidden;
+}
+	#restartLink:hover{
+		color: orange;
+		letter-spacing: 3px;
+	}
+
+.pump_coin{
+	height: 41px;
+	width: 41px;
+	position: absolute;
+	background: url('res/pumpkinCoin.png');
+	top: 4.5px;
+	left: 10px;
+}
+
+#pumpkin_count{
+	height: 100%;
+	width: auto;
+	position: absolute;
+	font-size: 40px;
+	color: orange;
+	line-height: 50px;
+	font-family: 'VT323', monospace;
+	left: 60px;
+}
+
+#plr_score{
+	height: 100%;
+	width: 500px;
+	position: absolute;
+	font-size: 40px;
+	color: white;
+	line-height: 50px;
+	font-family: 'VT323', monospace;
+	left: 50%;
+	margin-left: -250px;
+	text-align: center;
+}
+
+#plr_health{
+	height: 100%;
+	width: auto;
+	font-size: 40px;
+	color: orange;
+	position: absolute;
+	line-height: 50px;
+	padding-right: 10px;
+	right: 0px;
+	top: 0px;
+	color: rgb(119,221,119);
+	font-family: 'VT323', monospace;
+}
+
+#tools_cont{
+	height: 80px;
+	width: 100%;
+	position: absolute;
+	bottom: 40px;
+	background: rgb(30,30,30);
+	z-index: 1;
+}
+
+.tool{
+	height: 100%;
+	width: 298px;
+	position: absolute;
+	background: rgb(30,30,30);
+	border-right: 1px solid rgb(20,20,20);
+	border-left: 1px solid rgb(20,20,20);
+}
+
+.tool_text{
+	height: 40px;
+	width: 288px;
+	position: absolute;
+	font-family: 'VT323', monospace;
+	font-size: 20px;
+	color: white;
+	line-height: 40px;
+	padding-left: 10px;
+	cursor: pointer;
+	transition-duration: 0.2s;
+}
+	.tool_text:hover{
+		background: rgb(50,50,50);
+	}
+
+.tool_coin{
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	top: 45px;
+	left: 10px;
+	background-image: url('res/pumpkinCoin.png');
+	background-size: contain;
+}
+
+.upgrade{
+	height: 40px;
+	width: 238px;
+	top: 40px;
+	left: 40px;
+	color: orange;
+	margin-left: 10px;
+}
+	#movement_tool{left: 300px;}
+	#compost_tool{left: 600px;}
+	#grenade_tool{left: 900px;}
+
+footer{
+	height: 40px;
+	width: 100%;
+	background: rgb(20,20,20);
+	position: absolute;
+	bottom: 0px;	
+	z-index: 3;
+	font-size: 20px;
+	line-height: 40px;
+	color: white;
+	font-family: 'VT323', monospace;
+	letter-spacing: 3px;
+	text-shadow: 0px 2px 2px rgb(150,150,150);
+	text-indent: 40px;
+}
+
+.social_buttons{
+	height: 26px;
+	width: 26px;
+	position: absolute;
+	background: red;
+	border-radius: 25px;
+	top: 7px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+	#instagram{
+		background-image: url('res/instagram.png');
+		right: 40px;
+	}
+	#linkedin{
+		background-image: url('res/linkedin.png');
+		right: 70px;
+	}
