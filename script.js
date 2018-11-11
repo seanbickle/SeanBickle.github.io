@@ -19,7 +19,7 @@ window.onload = function(){
 	//GAME CANVAS
 	//setup canvas
 	cnv = document.getElementById('cnv');
-	ctx = cnv.getContext('2d');
+	ctx = cnv.getContext("2d");
 	//get canvas height and width
 	winWidth = cnv.width;
 	winHeight = cnv.height;
