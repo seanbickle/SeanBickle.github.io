@@ -93,6 +93,9 @@ function resetGame(){
 	document.getElementById("highScore").style.height = "0px";
 	document.getElementById("restartLink").style.height = "0px";
 	
+	//Reset highscore val in case on was just set
+	highScore = localStorage.getItem("highScore");
+	
 	pkCounter.innerHTML = "0";
 	
 	//Resume game loop
@@ -207,7 +210,6 @@ function endGame(){
 	//check high score
 	if(highScore < finalScore){
 		document.getElementById("highScore").style.height = "50px";
-		console.log(finalScore);
 		localStorage.setItem("highScore", finalScore);
 	}
 	
