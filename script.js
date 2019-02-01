@@ -1,221 +1,171 @@
-//GLOBAL VARIABLES
-//HTML tool container
-var tools_cont;
-var tools_height;
-//Array of HTML tool objects
-var tools = [];
-//Toolbar minimiser object
-var minbar;
-//JS patch objects
-var patches = [];
-//HTML soil objects
-var soil = [];
-//Audio clips
-var audio = [];
-//Score
-var score = 0;
-//Current tool
-var tool = -1;
-//difficulty
-var diff = 0;
-//Boundary of possible times for growth transition
-var growBounds = [10,20];
+//Canvas obj & ctx
+var cnv;
+var ctx;
+//Colours
+var c_blue = "rgb(76, 170, 247)";
+//Dots
+var dots = [];
+//Mouse x + y;
+var mx = my = -100;
+//DOM elements
+var title;
 
-//SOIL PATCH CLASS
-class Patch{
-	constructor(t){
-		//Growth stage (grass, soil, seeds etc.)
-		this.stage = 0;
-		//Time seeds were updated
-		this.lastUpdate = 0;
-		//Time taken for patch to increase growth
-		this.updateTime = t;
+window.onload=function(){
+	//Canvas objs
+	cnv = document.getElementById("canvas");
+	ctx = cnv.getContext("2d");
+	//Initialise canvas size to fill screen
+	resize();
+
+	//DOM elements
+	title = document.getElementById("title");
+
+	//Event Listeners
+	window.addEventListener("resize", resize);
+	window.addEventListener("mousemove", movemouse);
+	title.addEventListener("click", launchMelons);
+
+	//Initialise dots
+	for(var i = 0; i < 100; i++) dots.push(new Dot(ranRange(0, cnv.width), ranRange(0, cnv.height), ranRange(-10,10)/10, ranRange(-10,10)/10, "white"));
+
+	//Refresh
+	setInterval(refresh, 1000/60);
+}
+
+function launchMelons(){
+	window.location = "melons/index.htm";
+}
+
+function resize(){
+	cnv.height = window.innerHeight;
+	cnv.width = window.innerWidth;
+}
+
+function refresh(){
+	//Draw background
+	ctx.fillStyle = "rgb(5,5,5)"
+	rect(0, 0, cnv.width, cnv.height, "");
+
+	//Update pos & draw
+	ctx.fillStyle = "white";
+	for(var i = 0; i < dots.length; i++){
+		//Move dots
+		dots[i].move();
+
+		//Draw dots
+		circ(dots[i].x, dots[i].y, dots[i].r, dots[i].c);
 	}
+	ctx.fill();
+
+	//Connect all close dots
+	ctx.strokeStyle = c_blue;
+	for(var i = 0; i < dots.length; i++){
+		connect();
+	}
+	ctx.stroke();
 }
 
-window.onload = function(){
-	//DOCUMENT ELEMENTS
-	diff_btn = document.getElementById("diff");
-	minbar = document.getElementById("min_bar");
-	tools_cont = document.getElementById("tools_cont");
-	tools_height = tools_cont.style.height;
-	tools = document.getElementsByClassName("tools");
-	soil = document.getElementsByClassName("soil");
-	audio = [new Audio("res/sound/select.wav"), new Audio("res/sound/water.wav")];
-
-	//EVENT LISTENERS
-	//Social Media Buttons
-	document.getElementById("linkedin").addEventListener("click", function(){ window.open("https://www.linkedin.com/in/sean-bickle-6255a511b")});
-	document.getElementById("instagram").addEventListener("click", function(){ window.open("https://www.instagram.com/sean_bickle3")});
-	//Key presses
-	document.addEventListener("keydown", keypress)
-	//Difficulty Button
-	diff_btn.addEventListener("click", changeDiff);
-	//Tools Minimise Bar
-	minbar.addEventListener("click", minTools);
-	//Tool Buttons
-	for(var i = 0; i < tools.length; i++) tools[i].addEventListener("click", selectTool);
-	//Soil Patches
-	for(var i = 0; i < soil.length; i++) soil[i].addEventListener("click", useTool);
-	//for(var i = 0; i < soil.length; i++) soil[i].addEventListener("mousemove", useTool);
-
-	//Fill Patches Array
-	initPatches();
-
-	//Game Loop
-	setInterval(updatePatches, 1000/30);
+function rect(x, y, w, h, c){
+	//ctx.fillStyle = c;
+	ctx.fillRect(x, y, w, h);
+	ctx.closePath();
 }
 
-//Return random val between minVal and maxVal
+function circ(x, y, r, c){
+	//ctx.fillStyle = c;
+	ctx.beginPath();
+	ctx.arc(x, y, r, 0, 2 * Math.PI);
+	ctx.fill();
+}
+
+//Generate random int between range
 function ranRange(minVal, maxVal){
 	return Math.floor(Math.random() * (maxVal - minVal)) + minVal;
 }
 
-//Create array of patches
-function initPatches(){
-	//Create array of patches of length matching number of patches on page
-	for(var i = 0; i < soil.length; i++){
-		//Init patch with time to grow as random time between bounds
-		patches.push(new Patch(ranRange(growBounds[0],growBounds[1])));
-	}
-}
+function connect(){
+	//check all dots except last
+	for(var i = 0; i < dots.length - 1; i++){
+		//check any dot that hasn't already been checked for current dot
+		for(var j = i + 1; j < dots.length; j++){
+			var x_diff = dots[i].x - dots[j].x;
+			var y_diff = dots[i].y - dots[j].y;
+			var dist = Math.sqrt(Math.pow(x_diff, 2) + Math.pow(y_diff, 2));
 
-//Update patch graphic + state
-function updatePatches(){
-	//Time of update
-	var currentTime = Math.trunc(performance.now() / 1000);
-
-	for(var i = 0; i < patches.length; i++){
-		var timePassed = currentTime - patches[i].lastUpdate;
-
-		//Check if patch is due update
-		if(timePassed > patches[i].updateTime){
-			if(patches[i].stage == 1){ //Regrow grass if left unplanted
-				patches[i].stage = 0;
-				patches[i].lastUpdate = currentTime;
-				soil[i].style.border = "3px solid rgb(104,205,104)";
-			} else if(patches[i].stage == 2){ //Crow attack if left unwatered
-				++patches[i].stage;
-				patches[i].lastUpdate = currentTime;
-			} else if(patches[i].stage == 3){ //Crow disappears over time
-				patches[i].stage = 1;
-				patches[i].lastUpdate = currentTime;
-			}else if((patches[i].stage >= 4 && patches[i].stage < 8) && currentTime != patches[i].lastUpdate){ //Grow melon
-				++patches[i].stage;
-				patches[i].lastUpdate = currentTime;
+			//Check distance between dots
+			if(dist <= 120){
+				//Draw line between points
+				ctx.moveTo(dots[i].x, dots[i].y);
+				ctx.lineTo(dots[j].x, dots[j].y);
 			}
-
-			//Update graphic
-			redraw(i);
 		}
 	}
 }
 
-//Redraw background of patch i
-function redraw(i){
-	soil[i].style.backgroundImage = "url('res/stage" + patches[i].stage + ".png')";
+//Get mouse x + y
+function movemouse(e){
+	mx = e.clientX;
+	my = e.clientY;
 }
 
-//Change difficulty setting
-function changeDiff(){
-	var labels = ["EASY", "HARD", "FARMER"];
-	//Increment difficulty
-	if(++diff == 3) diff = 0;
-	//Update difficulty indicator
-	this.innerHTML = labels[diff];
-
-	//Change patch "time to grow" boundaries
-	if(diff == 0) growBounds = [10,20];
-	else if(diff == 1) growBounds = [2,8];
-	else if(diff == 2) growBounds = [1728000,2304000];
-
-	//Update all patch times to be within new growth boundary
-	for(var i = 0; i < patches.length; i++) patches[i].updateTime = ranRange(growBounds[0], growBounds[1]);
-}
-
-//Hide / Show Toolbar
-function minTools(){
-	if(tools_cont.style.height != "20px"){
-		tools_height = tools_cont.style.height;
-		tools_cont.style.height = "20px";
-		minbar.innerHTML = "show tools";
-	}else{
-		tools_cont.style.height = tools_height;
-		minbar.innerHTML = "hide tools";
-	}
-}
-
-//Use toolbar tools to select functionality
-function selectTool(){
-	//Clear last button style
-	for(var i = 0; i < tools.length; i++){
-		tools[i].style.backgroundColor = "transparent";
-		tools[i].style.textDecoration = "none";
-	}
-	//Update current button style
-	this.style.backgroundColor = "rgb(40,40,40)";
-	this.style.textDecoration = "underline";
-
-	//Update Tool
-	tool = this.dataset.id;
-
-	//Update cursor icon
-	if(tool < 4) for(var i = 0; i < soil.length; i++) soil[i].style.cursor = "url(res/cursor" + tool + ".png), auto";
-}
-
-//Use keys to select tools
-function keypress(e){
-	if(e.keyCode > 48 && e.keyCode < 53){
-		tool = e.keyCode - 49;
-		for(var i = 0; i < soil.length; i++) soil[i].style.cursor = "url(res/cursor" + tool + ".png), auto";
-	}
-}
-
-//Perform tool action on patch
-function useTool(){
-	//Selected patch
-	var p = this.dataset.id;
-
-	if(patches[p].stage == 0 && tool == 0){ //Spade on grass
-		//Update patch border to soil
-		this.style.border = "3px solid rgb(134, 98, 53)";
-		//Increase patch stage
-		patches[p].stage = 1;
-		//Refresh time of last update
-		patches[p].lastUpdate = Math.trunc(performance.now() / 1000);
-	} else if(patches[p].stage == 1 && tool == 1){ //Seeds on soil
-		patches[p].stage = 2;
-		patches[p].lastUpdate = Math.trunc(performance.now() / 1000);
-	} else if(patches[p].stage == 2 && tool == 2){ //Can on seeds
-		patches[p].stage = 4;
-		patches[p].lastUpdate = Math.trunc(performance.now() / 1000);
-	} else if(patches[p].stage >= 7 && tool == 3){ //Clippers on melon
-		harvestMelon(p, patches[p].stage > 7);
+//dot class
+class Dot {
+	constructor(x, y, sx, sy, c) {
+		this.x = x;
+		this.y = y;
+		this.r = 3;
+		this.c = c;
+		this.sx = sx;
+		this.sy = sy;
+		this.vx = 0;
+		this.vy = 0;
 	}
 
-	redraw(p);
-}
+	move(){
+		//set velocity
+		if(Math.abs(this.x - mx) < 10 && Math.abs(this.y - my) < 50){
+			this.sx *= -1;
+			this.sy *= -1;
 
-//Remove melon + update tool
-function harvestMelon(p, dead){
-	//Update score
-	if(dead) --score;
-	else{
-		//Point for melon harvested and growing melon
-		for(var i = 0; i < patches.length; i++){
-			if(patches[i].stage >= 4 && patches[i].stage != 8) ++score;
+			if(mx < this.x && my < this.y){
+				this.vx = 5;
+				this.vy = 5;
+			}else if(mx > this.x && my > this.y){
+				this.vx = -5;
+				this.vy = -5;
+			}else if(mx < this.x && my > this.y){
+				this.vx = 5;
+				this.vy = -5;
+			}else{
+				this.vx = -5;
+				this.vy = 5;
+			}
+			console.log("move");
+		}
+
+		//Move based on speed
+		this.x += this.sx + this.vx;
+		this.y += this.sy + this.vy;
+
+		//Reduce velocity
+		if(this.vx != 0){
+			if(this.vx > 0) this.vx-=0.1;
+			else this.vx+=0.1;
+
+			if(this.vy > 0) this.vy-=0.1;
+			else this.vy+=0.1;
+
+		}
+
+		//Check if off edge horizontally
+		if(this.x + this.r > cnv.width || this.x - this.r < 0){
+			this.sx *= -1;
+			this.vx *= -1;
+		}
+
+		if(this.y + this.r > cnv.height || this.y - this.r < 0){
+			this.sy *= -1;
+			this.vy *= -1;
 		}
 	}
-
-	//Update visual Score
-	document.getElementById("melon_count").innerHTML = score;
-	//Reset patch
-	patches[p].stage = 1;
-	patches[p].lastUpdate = Math.trunc(performance.now() / 1000);
-	patches[p].updateTime = ranRange(growBounds[0], growBounds[1]);
-}
-
-function play(sound){
-	sound.currentTime = 0;
-	sound.play();
 }
