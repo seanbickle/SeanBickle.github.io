@@ -26,7 +26,7 @@ window.onload=function(){
 	title.addEventListener("click", launchMelons);
 
 	//Initialise dots
-	for(var i = 0; i < 100; i++) dots.push(new Dot(ranRange(0, cnv.width), ranRange(0, cnv.height), ranRange(-10,10)/10, ranRange(-10,10)/10, "white"));
+	for(var i = 0; i < 65; i++) dots.push(new Dot(ranRange(0, cnv.width), ranRange(0, cnv.height), ranRange(-10,10)/10, ranRange(-10,10)/10, "white"));
 
 	//Refresh
 	setInterval(refresh, 1000/60);
@@ -43,8 +43,7 @@ function resize(){
 
 function refresh(){
 	//Draw background
-	ctx.fillStyle = "rgb(5,5,5)"
-	rect(0, 0, cnv.width, cnv.height, "");
+	rect(0, 0, cnv.width, cnv.height, "rgb(5,5,5)");
 
 	//Update pos & draw
 	ctx.fillStyle = "white";
@@ -53,29 +52,28 @@ function refresh(){
 		dots[i].move();
 
 		//Draw dots
-		circ(dots[i].x, dots[i].y, dots[i].r, dots[i].c);
+		circ(dots[i].x, dots[i].y, dots[i].r);
 	}
-	ctx.fill();
 
 	//Connect all close dots
-	ctx.strokeStyle = c_blue;
+	//ctx.strokeStyle = c_blue;
 	for(var i = 0; i < dots.length; i++){
 		connect();
 	}
-	ctx.stroke();
+	//ctx.stroke();
 }
 
 function rect(x, y, w, h, c){
-	//ctx.fillStyle = c;
+	ctx.fillStyle = c;
 	ctx.fillRect(x, y, w, h);
 	ctx.closePath();
 }
 
-function circ(x, y, r, c){
-	//ctx.fillStyle = c;
+function circ(x, y, r){
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2 * Math.PI);
 	ctx.fill();
+	ctx.closePath();
 }
 
 //Generate random int between range
@@ -83,20 +81,30 @@ function ranRange(minVal, maxVal){
 	return Math.floor(Math.random() * (maxVal - minVal)) + minVal;
 }
 
+//Draw line between dots
 function connect(){
-	//check all dots except last
+	//Enumerate all dots (besides last)
 	for(var i = 0; i < dots.length - 1; i++){
 		//check any dot that hasn't already been checked for current dot
 		for(var j = i + 1; j < dots.length; j++){
+			//calculate x and y offset of current dot to another dot
 			var x_diff = dots[i].x - dots[j].x;
 			var y_diff = dots[i].y - dots[j].y;
+			//calculate direct distance to another dot
 			var dist = Math.sqrt(Math.pow(x_diff, 2) + Math.pow(y_diff, 2));
 
-			//Check distance between dots
+			//Connect dots if distance is less than 120
 			if(dist <= 120){
-				//Draw line between points
+				ctx.beginPath();
+
+				ctx.strokeStyle = "hsl(206,88%," + ((1 - (dist/120)) * 100) + "%)";
+
 				ctx.moveTo(dots[i].x, dots[i].y);
 				ctx.lineTo(dots[j].x, dots[j].y);
+
+				ctx.stroke();
+
+				ctx.closePath();
 			}
 		}
 	}
@@ -122,7 +130,7 @@ class Dot {
 	}
 
 	move(){
-		//set velocity
+		//set velocity if dot near mouse
 		if(Math.abs(this.x - mx) < 10 && Math.abs(this.y - my) < 50){
 			this.sx *= -1;
 			this.sy *= -1;
@@ -140,7 +148,6 @@ class Dot {
 				this.vx = -5;
 				this.vy = 5;
 			}
-			console.log("move");
 		}
 
 		//Move based on speed
@@ -157,13 +164,27 @@ class Dot {
 
 		}
 
-		//Check if off edge horizontally
-		if(this.x + this.r > cnv.width || this.x - this.r < 0){
+		//If moving off left side
+		if(this.x - this.r + this.sx <= 0){
+			this.x = this.r;
 			this.sx *= -1;
 			this.vx *= -1;
 		}
-
-		if(this.y + this.r > cnv.height || this.y - this.r < 0){
+		//if moving off right side
+		else if(this.x + this.r + this.sx >= cnv.width){
+			this.x = cnv.width - this.r;
+			this.sx *= -1;
+			this.vx *= -1;
+		}
+		//if moving off top side
+		else if(this.y - this.r + this.sy <= 0){
+			this.y = this.r;
+			this.sy *= -1;
+			this.vy *= -1;
+		}
+		//if moving off bottom side
+		else if(this.y + this.r + this.sy >= cnv.height){
+			this.y = cnv.height - this.r;
 			this.sy *= -1;
 			this.vy *= -1;
 		}
