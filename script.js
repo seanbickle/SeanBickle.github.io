@@ -17,13 +17,9 @@ window.onload=function(){
 	//Initialise canvas size to fill screen
 	resize();
 
-	//DOM elements
-	title = document.getElementById("title");
-
 	//Event Listeners
 	window.addEventListener("resize", resize);
 	window.addEventListener("mousemove", movemouse);
-	title.addEventListener("click", launchMelons);
 
 	//Initialise dots
 	for(var i = 0; i < 65; i++) dots.push(new Dot(ranRange(0, cnv.width), ranRange(0, cnv.height), ranRange(-10,10)/10, ranRange(-10,10)/10, "white"));
@@ -32,18 +28,33 @@ window.onload=function(){
 	setInterval(refresh, 1000/60);
 }
 
-function launchMelons(){
+function loadMelons(){
 	window.location = "melons/index.htm";
 }
 
 function resize(){
 	cnv.height = window.innerHeight;
 	cnv.width = window.innerWidth;
+
+	//Check size of content container & align to top if going off the page
+	contentCont = document.getElementById("content_container");
+	if(contentCont.offsetHeight > window.innerHeight){
+		contentCont.style.top = "0";
+		contentCont.style.transform = "translate(-50%)";
+	}else{
+		contentCont.style.top = "50%";
+		contentCont.style.transform = "translate(-50%, -50%)";
+	}
 }
 
 function refresh(){
 	//Draw background
 	rect(0, 0, cnv.width, cnv.height, "rgb(5,5,5)");
+
+	//Connect all close dots
+	for(var i = 0; i < dots.length; i++){
+		connect();
+	}
 
 	//Update pos & draw
 	ctx.fillStyle = "white";
@@ -54,13 +65,6 @@ function refresh(){
 		//Draw dots
 		circ(dots[i].x, dots[i].y, dots[i].r);
 	}
-
-	//Connect all close dots
-	//ctx.strokeStyle = c_blue;
-	for(var i = 0; i < dots.length; i++){
-		connect();
-	}
-	//ctx.stroke();
 }
 
 function rect(x, y, w, h, c){
@@ -95,15 +99,13 @@ function connect(){
 
 			//Connect dots if distance is less than 120
 			if(dist <= 120){
+				//Generate line
 				ctx.beginPath();
-
-				ctx.strokeStyle = "hsl(206,88%," + ((1 - (dist/120)) * 100) + "%)";
-
+				//Scale intensity of stroke to the distance of the dots
+				ctx.strokeStyle = "hsl(206,88%," + (((1 - (dist/120)) * 99) + 1) + "%)";
 				ctx.moveTo(dots[i].x, dots[i].y);
 				ctx.lineTo(dots[j].x, dots[j].y);
-
 				ctx.stroke();
-
 				ctx.closePath();
 			}
 		}

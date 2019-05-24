@@ -66,6 +66,10 @@ window.onload = function(){
 	setInterval(updatePatches, 1000/30);
 }
 
+function home(){
+	window.location = "../index.html"
+}
+
 //Return random val between minVal and maxVal
 function ranRange(minVal, maxVal){
 	return Math.floor(Math.random() * (maxVal - minVal)) + minVal;
