@@ -1,0 +1,134 @@
+body{
+    background: #f2f2f2;
+    margin: 0px;
+    font-size: 0px;
+    user-select: none;
+}
+
+#container{
+    height: auto;
+    width: 1000px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#title{
+    height: auto;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 100px;
+    color: #ea8a8a;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 2px 1px #b36363;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#result{
+    height: auto;
+    width: 100%;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#cnv{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+#it_input{
+    height: 30px;
+    width: 49%;
+    line-height: 30px;
+    font-family: 'Montserrat', sans-serif;
+    border: 0px;
+    padding: 0px;
+    display: inline-block;
+    font-size: 20px;
+}
+
+#calc_button{
+    height: 30px;
+    width: 49%;
+    line-height: 30px;
+    display: inline-block;
+    margin-left: 2%;
+    background: #b36363;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+    #calc_button:hover{
+        background: #d88282;
+        text-shadow: 0px 2px 1px rgba(0,0,0,0.1);
+    }
+    #calc_button:active{
+        background: #b36161;
+        text-shadow: 0px 3px 2px rgba(0,0,0,0.1);
+    }
+
+#footer_container{
+	height: 30px;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	background: rgb(10,10,10);
+	user-select: none;
+}
+
+#footer{
+	height: 100%;
+	width: 1200px;
+	position: absolute;
+	left: -600px;
+	margin-left: 50%;
+	font-family: 'VT323', monospace;
+	font-size: 20px;
+	line-height: 30px;
+	color: white;
+	text-shadow: 0px 2px 2px rgb(150,150,150);
+	letter-spacing: 3px;
+}
+
+.social_buttons{
+	height: 26px;
+	width: 26px;
+	position: absolute;
+	border-radius: 25px;
+	top: 2px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	user-select: none;
+}
+	#instagram{
+		background-image: url('instagram.png');
+		right: 0px;
+	}
+	#linkedin{
+		background-image: url('linkedin.png');
+		right: 30px;
+	}
+
+@media only screen and (max-width: 1200px) {
+    #container{width: 100%;}
+    #footer{width: 100%; left: 0px; margin: 0px;}
+}
+
+@media only screen and (max-width: 650px) {
+    #title{font-size: 70px;}
+    #result{font-size: 20px;}
+}
+
+@media only screen and (max-width: 460px) {
+    #title{font-size: 50px;}
+    #result{font-size: 18px;}
+}
