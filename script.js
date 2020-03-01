@@ -26,7 +26,7 @@ function create_project_card(project){
 	if(!project.link_text) project.link_text = "<i class='fas fa-binoculars'></i> Explore"
 
 	return `
-	<div class="col-md-6 col-lg-3 mb-4">
+	<div class="col-lg-6 col-xl-3 mb-4">
 		<div class="card h-100">
 			` + image + `
 			<div class="card-body">
