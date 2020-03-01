@@ -18,7 +18,7 @@ function create_project_card(project){
 	if(project.badges){
 		badges += "<p>"
 		for(var i = 0; i < project.badges.length; i++){
-			badges += "<span class='badge badge-warning'>" + project.badges[i] + "</span>\n"
+			badges += "<span class='badge badge-primary'>" + project.badges[i] + "</span>\n"
 		}
 		badges += "</p>"
 	}
