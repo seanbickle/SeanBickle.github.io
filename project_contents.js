@@ -5,14 +5,14 @@ var projects = [
     {
         title: "Movie Poster Text",
         badges: [python_badge, "OpenCV"],
-        body: "A python application to generate a movie poster from a passage of text. I hope to return to this project to build some kind of preview interface.",
+        body: "A python application to generate a movie poster from a passage of text.",
         link: "https://github.com/SeanBickle/moviepostertext",
         link_text: "<i class='fab fa-github'></i> Repo",
     },
     {
         title: "Melons",
         badges: [js_badge],
-        body: "A single-player melon-farming game created in 24 hours during a university game-jam. This won 'Best use of Theme', which was 'Time'.",
+        body: "A single-player melon-farming game created in 24 hours during a university game-jam in 2018. This won <i>Best use of Theme</i>, which was <i>Time</i>.",
         link: "melons/index.htm",
         link_text: "<i class='fas fa-gamepad'></i> Play"
     },
