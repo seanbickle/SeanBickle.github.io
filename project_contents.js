@@ -20,7 +20,7 @@ var projects = [
         title: "Pi Estimator",
         badges: [js_badge],
         body: "A simple visual estimator of Pi. I think the record for most iterations that someone sent me is about 3.5 million.",
-        link: "pi/index.htm",
+        link: "pi-viz/index.htm",
     },
     {
         title: "Project Euler",
