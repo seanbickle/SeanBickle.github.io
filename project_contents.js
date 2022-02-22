@@ -3,6 +3,13 @@ python_badge = "<i class='fab fa-python'></i> Python"
 
 var projects = [
     {
+        title: "griddle",
+        badges: [js_badge, python_badge],
+        body: "A daily word search game, inspired by Wordle.",
+        link: "griddle/index.html",
+        link_text: "<i class='fas fa-gamepad'></i> Play"
+    },
+    {
         title: "Movie Poster Text",
         badges: [python_badge, "OpenCV"],
         body: "A python application to generate a movie poster from a passage of text.",
@@ -22,11 +29,4 @@ var projects = [
         body: "A simple visual estimator of Pi. I think the record for most iterations that someone sent me is about 3.5 million.",
         link: "pi-viz/index.htm",
     },
-    {
-        title: "Project Euler",
-        badges: [python_badge],
-        body: "My solutions to some of the 'Project Euler' programming challenges.",
-        link: "https://github.com/SeanBickle/Project-Euler",
-        link_text: "<i class='fab fa-github'></i> Repo"
-    }
 ]
